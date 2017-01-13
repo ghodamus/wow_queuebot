@@ -9,13 +9,14 @@ import discord
 
 class handler():
 
-	# List of IDs of people who should be able to execute admin commands in the bot.
-	admins = ['']
-
+	
 	# Initialization method.
 	# Requers a track_queue object from QueueTracker.
 	def __init__(self,tracker):
 		self.t = tracker
+		# List of IDs of people who should be able to execute admin commands in the bot.
+		self.admins = []
+
 
 
 	# ---------- BEGIN COMMAND HANDLERS ----------
@@ -132,7 +133,7 @@ class handler():
 
 			# A bunch of elif statements for each valid text command.
 			# We check for message.author.id in admins to validate authorization for admin commands.
-			elif inputList[1] == "safe" and message.author.id in admins:
+			elif inputList[1] == "safe" and message.author.id in self.admins:
 				return self.safe(message)
 			elif inputList[1] == "help":
 				return self.help_commands(message)

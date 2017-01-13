@@ -10,7 +10,7 @@ class track_queue():
 	# Entries were originally stored by username instead of user id.
 	# This method converts older entries to the proper index.
 	def uname_to_uid(self,username,uid):
-		if username in self.tracks and uid not in tracks:
+		if username in self.tracks and uid not in self.tracks:
 			self.tracks[uid] = [x for x in self.tracks[username]]
 			del self.tracks[username]
 

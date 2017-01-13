@@ -41,6 +41,10 @@ async def on_message(message):
 		
 		print(datetime.datetime.now())
 		print("Received command from " + message.author.name + " (" + message.author.id + ")")
+		try:
+			print("Server was " + message.server.name)
+		except AttributeError:
+			print("Message was sent directly.")
 
 		# Calls the handler object to parse the message.
 		# Expected result is a tuple containing two values: message destingation, and message text.
@@ -51,6 +55,18 @@ async def on_message(message):
 		print("\n----------\n")
 
 @client.event
+async def on_member_join(member):
+	if member.server.name == "Elysium Queuebot":
+		print(member.name + " has joined Elysium Queuebot server; sending welcome message.")
+		msg = "Welcome to the Elysium Queuebot server! I'm Queuebot.\n"
+		msg += "You can send commands to me here or in the #elysium_queue channel.\n"
+		msg += 'Type "!wq help" for a list of basic commands, or visit my user manual at https://goo.gl/3Xv8ib\n'
+		msg += "Thanks for visiting, and best of luck in the queue!"
+
+		await client.send_message(member,msg)
+		print("\n----------\n")
+
+@client.event
 async def on_ready():
     print('Logged in as')
     print(client.user.name)
@@ -58,5 +74,5 @@ async def on_ready():
     print('Systems online!')
     print('\n----------\n')
 
-# Put in your client secret here.
-client.run('Your client secret goes here.')
+# Put your client secret in here.
+client.run('Discord Client Secret')
